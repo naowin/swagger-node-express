@@ -587,14 +587,25 @@
       if (includeApiKey && (this.resource.api.api_key != null) && this.resource.api.api_key.length > 0) {
         args[this.apiKeyName] = this.resource.api.api_key;
       }
+
       if (this.supportHeaderParams()) {
         queryParams = jQuery.param(this.getQueryParams(args, includeApiKey));
       } else {
         queryParams = jQuery.param(this.getQueryAndHeaderParams(args, includeApiKey));
       }
+
+      var token = $('#input_sessionKey').val();
+      if(token && token.length > 0)
+      {
+          queryParams = 'token=' + token + queryParams;
+      }
+
       if ((queryParams != null) && queryParams.length > 0) {
         url += "?" + queryParams;
       }
+
+
+
       return url;
     };
 

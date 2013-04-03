@@ -417,7 +417,6 @@ body #header a#logo {
 body #header form#api_selector {
     display: block;
     clear: none;
-    float: right;
 }
 
 body #header form#api_selector .input {
@@ -1586,5 +1585,5 @@ pre code {
   color: #0F6AB4;
   font-size: 1.1em;
   margin: 0;
-  padding: 15px 0 5px 0px;
+  padding: 0px 0 5px 0px;
 }

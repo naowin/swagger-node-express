@@ -255,7 +255,14 @@ function program1(depth0,data) {
   buffer += escapeExpression(stack1) + "\n        ";
   return buffer;}
 
-  buffer += "\n<div class='container' id='resources_container'>\n    <ul id='resources'>\n    </ul>\n\n    <div class=\"footer\">\n        <br>\n        <br>\n        <h4 style=\"color: #999\">[ <span style=\"font-variant: small-caps\">base url</span>: ";
+  var domain = '';
+  if(depth0.discoveryUrl.indexOf('domain') > -1)
+  {
+      var domainIdx = depth0.discoveryUrl.indexOf('domain=') + 7;
+      var domainName = capitaliseFirstLetter(depth0.discoveryUrl.substring(domainIdx, depth0.discoveryUrl.length));
+      domain = "<div class='domainHeading'><h3 class='domainHeader'>" + domainName + " </h3></div>";
+  }
+  buffer += "\n<div class='container' id='resources_container'>\n   " + domain + " <ul id='resources'>\n    </ul>\n\n    <div class=\"footer\">\n        <br>\n        <br>\n        <h4 style=\"color: #999\">[ <span style=\"font-variant: small-caps\">base url</span>: ";
   foundHelper = helpers.basePath;
   stack1 = foundHelper || depth0.basePath;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -295,7 +302,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\n                    <h4>Response Class</h4>\n                    <p><span class=\"model-signature\" /></p>\n                    <br/>\n                    <div class=\"content-type\" />\n                ";}
+  return "\n                    <h4 class='newResponceClass' onclick='toggleResponseClass(this)'><a class='colorThis' href='javascript:void()'>Response Class</a></h4>\n                    <p><span class=\"model-signature hideResponseClass\" /></p>\n                    <br/>\n                    <div class=\"content-type\" />\n                ";}
 
 function program5(depth0,data) {
   
@@ -593,12 +600,12 @@ function program12(depth0,data) {
   buffer += escapeExpression(stack1) + "' placeholder='' type='text' value=''/>\n		";
   return buffer;}
 
-  buffer += "<td class='code'>";
+  buffer += "<td class='code'><span class='codeMargin'>";
   foundHelper = helpers.name;
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</td>\n<td>\n\n	";
+  buffer += escapeExpression(stack1) + "</span></td>\n<td>\n\n	";
   foundHelper = helpers.isBody;
   stack1 = foundHelper || depth0.isBody;
   stack2 = helpers['if'];
@@ -608,13 +615,13 @@ function program12(depth0,data) {
   tmp1.inverse = self.program(9, program9, data);
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n\n</td>\n<td>";
+  buffer += "\n\n</span></td>\n<td><span class='codeMargin'>";
   foundHelper = helpers.description;
   stack1 = foundHelper || depth0.description;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</td>\n<td>\n	<span class=\"model-signature\"></span>\n</td>\n\n";
+  buffer += "</span></td>\n<td>\n	<span class=\"model-signature\"></span>\n</td>\n\n";
   return buffer;});
 })();
 
@@ -701,12 +708,12 @@ function program11(depth0,data) {
   buffer += escapeExpression(stack1) + "</option>\n            ";
   return buffer;}
 
-  buffer += "<td class='code'>";
+  buffer += "<td class='code'><span class='codeMargin'>";
   foundHelper = helpers.name;
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</td>\n<td>\n    <select name='";
+  buffer += escapeExpression(stack1) + "</span></td>\n<td>\n    <select name='";
   foundHelper = helpers.name;
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -732,13 +739,13 @@ function program11(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    </select>\n</td>\n<td>";
+  buffer += "\n    </select>\n</span></td>\n<td>";
   foundHelper = helpers.description;
   stack1 = foundHelper || depth0.description;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</td>\n<td><span class=\"model-signature\"></span></td>\n";
+  buffer += "</span></td>\n<td><span class=\"model-signature\"></span></td>\n";
   return buffer;});
 })();
 
@@ -1189,6 +1196,7 @@ templates['status_code'] = template(function (Handlebars,depth0,helpers,partials
     SwaggerUi.prototype.updateSwaggerUi = function(data) {
       this.options.discoveryUrl = data.discoveryUrl;
       this.options.apiKey = data.apiKey;
+      this.options.token = data.token;
       return this.load();
     };
 
@@ -1197,7 +1205,20 @@ templates['status_code'] = template(function (Handlebars,depth0,helpers,partials
       if ((_ref = this.mainView) != null) {
         _ref.clear();
       }
-      this.headerView.update(this.options.discoveryUrl, this.options.apiKey);
+      //this.headerView.update(this.options.discoveryUrl, this.options.apiKey);
+      if(!this.options.main)
+      {
+          this.api = new SwaggerApi(this.options);
+      }
+      else
+      {
+          this.options.main = false;
+          domainMenu();
+          return Backbone.history.start({
+              pushState: true
+         });
+      }
+
       return this.api = new SwaggerApi(this.options);
     };
 
@@ -1266,7 +1287,8 @@ templates['status_code'] = template(function (Handlebars,depth0,helpers,partials
       'click #show-wordnik-dev-icon': 'showWordnikDev',
       'click #explore': 'showCustom',
       'keyup #input_baseUrl': 'showCustomOnKeyup',
-      'keyup #input_apiKey': 'showCustomOnKeyup'
+      'keyup #input_apiKey': 'showCustomOnKeyup',
+      'keyup #input_sessionKey': 'showCustomOnKeyup'
     };
 
     HeaderView.prototype.initialize = function() {};
@@ -1274,14 +1296,16 @@ templates['status_code'] = template(function (Handlebars,depth0,helpers,partials
     HeaderView.prototype.showPetStore = function(e) {
       return this.trigger('update-swagger-ui', {
         discoveryUrl: "http://petstore.swagger.wordnik.com/api/api-docs.json",
-        apiKey: "special-key"
+        apiKey: "special-key",
+        token: ''
       });
     };
 
     HeaderView.prototype.showWordnikDev = function(e) {
       return this.trigger('update-swagger-ui', {
         discoveryUrl: "http://api.wordnik.com/v4/resources.json",
-        apiKey: ""
+        apiKey: "",
+        token: ''
       });
     };
 
@@ -1297,7 +1321,8 @@ templates['status_code'] = template(function (Handlebars,depth0,helpers,partials
       }
       return this.trigger('update-swagger-ui', {
         discoveryUrl: $('#input_baseUrl').val(),
-        apiKey: $('#input_apiKey').val()
+        apiKey: $('#input_apiKey').val(),
+        token: $('#input_sessionKey').val()
       });
     };
 
@@ -1310,7 +1335,8 @@ templates['status_code'] = template(function (Handlebars,depth0,helpers,partials
       if (trigger) {
         return this.trigger('update-swagger-ui', {
           discoveryUrl: url,
-          apiKey: apiKey
+          apiKey: apiKey,
+          token: ''
         });
       }
     };
@@ -1583,6 +1609,13 @@ templates['status_code'] = template(function (Handlebars,depth0,helpers,partials
 
     OperationView.prototype.showResponse = function(response) {
       var prettyJson;
+      var currentToken = $('#input_sessionKey').val();
+      if (response.token != undefined && currentToken != response.token) {
+          $('#input_sessionKey').val(response.token);
+          var e = jQuery.Event("keyup"); e.keyCode = 13;
+          $('#input_sessionKey').trigger(e);
+      }
+
       prettyJson = JSON.stringify(response, null, "\t").replace(/\n/g, "<br>");
       return $(".response_body", $(this.el)).html(escape(prettyJson));
     };
@@ -1815,7 +1848,7 @@ templates['status_code'] = template(function (Handlebars,depth0,helpers,partials
       var template;
       template = this.template();
       $(this.el).html(template(this.model));
-      this.switchToDescription();
+      this.switchToSnippet();
       this.isParam = this.model.isParam;
       if (this.isParam) {
         $('.notice', $(this.el)).text('Click to set as parameter value');

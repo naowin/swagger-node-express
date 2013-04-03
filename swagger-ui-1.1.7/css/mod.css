@@ -1,0 +1,172 @@
+.codeMargin {
+    display:block;
+    margin-top: 30px;
+}
+
+.body-textarea {
+    margin-top: 28px;
+    width: 300px;
+    height: 100px;
+}
+
+.newResponceClass {
+    text-decoration: underline;
+}
+
+.content-type {
+    display:none;
+}
+
+
+body ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.post div.content a {
+    color: #10A54A;
+}
+
+body ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.get div.content a {
+    color: #0F6AB4;
+}
+
+body ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.delete div.content a {
+    color: #A41E22;
+}
+
+.hideResponseClass {
+    display:none;
+}
+
+body #header {
+    background-color: #89BF04;
+    padding: 25px;
+}
+
+body #header form#api_selector {
+    clear: none;
+    display: block;
+    float: right;
+    clear:right;
+}
+
+body #header form#api_selector .input input {
+    font-size: 0.9em;
+    margin: 0;
+    padding: 4px;
+}
+
+body #header form#api_selector .input {
+    clear: none;
+    display: block;
+    float: left;
+    margin-top: -16px;
+}
+
+.swaggerLogo {
+    color: white;
+    float: left;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: -15px;
+}
+
+.jupiterIcon {
+    float: left;
+    margin-top: -15px;
+    max-height: 25px;
+    max-width: 25px;
+    margin-right: 2px;
+}
+
+body #header form#api_selector .explorerField a#explore {
+    background-color: #538900;
+    border-radius: 4px 4px 4px 4px;
+    color: white;
+    display: block;
+    font-size: 0.9em;
+    font-weight: bold;
+    padding: 6px 8px;
+    text-decoration: none;
+    border: 1.5px solid #316a31;
+    margin-left: 26px;
+    margin-right: -45px;
+}
+
+
+
+.switchImg {
+    max-height: 33px;
+    max-width: 33px;
+    border-radius: 4px 4px 4px 4px;
+    margin-left: -9px;
+    margin-top: -2px;
+}
+
+.switchIcon {
+    float:left;
+   /* margin-left: 2px;
+    margin-right: 3px; */
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    background-image: url("../img/glyphicons-halflings.png");
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 15px;
+    line-height: 14px;
+    margin-top: -14px;
+    vertical-align: text-top;
+    width: 22px;
+}
+
+
+body #header form#api_selector .input input#input_baseUrl {
+    width: 400px;
+}
+
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+}
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+    border-radius: 4px 4px 4px 4px;
+    color: #555555;
+    display: inline-block;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 10px;
+    padding: 4px 6px;
+    vertical-align: middle;
+}
+
+
+body #header form#api_selector .input input#input_apiKey {
+    width: 200px;
+}
+
+
+body #header form#api_selector .input input#input_sessionKey{
+    width: 200px;
+}
+
+.domainHeading {
+    border: 1px solid transparent;
+    clear: both;
+    display: block;
+    float: none;
+    overflow: hidden;
+    border-bottom: 1px solid #717171;
+}
+
+.domainHeader {
+    clear: none;
+    color: #717171;
+    display: block;
+    float: left;
+    font-family: "Droid Sans",sans-serif;
+    font-weight: bold;
+    padding-left: 0;
+    font-size: 1.3em;
+
+}
